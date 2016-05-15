@@ -25,7 +25,7 @@ def main():
                  .where((models.Feed.next_fetch <= datetime.datetime.utcnow()) |
                         (models.Feed.next_fetch == None)))
     for feed in to_update:
-        print "Updating '%s' from %s" % (feed.title, feed.url)
+        print("Updating '{}' from {}".format(feed.title, feed.url), file=sys.stderr)
         # parse(url_file_stream_or_string,
         #       etag=None, modified=None, agent=None, referrer=None,
         #       handlers=None, request_headers=None, response_headers=None)

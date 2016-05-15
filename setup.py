@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os.path
 
@@ -26,6 +26,7 @@ setup(
     test_suite='tests.suite',
 
     install_requires=[
+        'docopt',
         'feedparser',
         'Flask',
         'Flask-WTF',
@@ -33,6 +34,15 @@ setup(
         'wtforms',
         'wtf-peewee',
     ],
+
+    classifiers=(
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+    ),
 
     author='Keith Gaughan',
     author_email='k@stereochro.me',

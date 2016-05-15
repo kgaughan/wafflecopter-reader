@@ -49,19 +49,19 @@ def main():
     try:
         user = models.User.get(username=args['--user'])
     except models.User.DoesNotExist:
-        print >> sys.stderr, "Unknown user: %s" % args['--user']
+        print("Unknown user: {}", args['--user'], file=sys.stderr)
         return 1
 
     if args['import']:
         try:
-            with open(args['<file>'], 'r') as fh:
+            with open(args['<file>'], 'rb') as fh:
                 contents = fh.read()
         except IOError as exc:
-            print >> sys.stderr, exc
+            print(exc, file=sys.stderr)
             return 1
         with models.db.database.atomic():
             imported = import_opml(user, opml.parse_string(contents))
-            print "New feeds imported: %d" % (imported,)
+            print("New feeds imported: {}", imported)
     elif args['export']:
         return export_opml(user)
 
