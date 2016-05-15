@@ -29,6 +29,10 @@ class Feed(db.Model):
     # Number of minute between fetches.
     period = peewee.IntegerField(default=60)
 
+    # Headers for performing conditional GET requests.
+    http_etag = peewee.CharField(null=True)
+    http_last_modified = peewee.CharField(null=True)
+
 
 class Subscription(db.Model):
     """
