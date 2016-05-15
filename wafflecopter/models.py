@@ -21,13 +21,13 @@ class Feed(db.Model):
     # URL of the feed.
     url = peewee.CharField(unique=True)
     # URL of the associated site.
-    site_url = peewee.CharField()
+    site_url = peewee.CharField(null=True)
     # When the feed was last fetched.
     last_fetched = peewee.DateTimeField(null=True)
     # When the feed is scheduled to be fetched again.
     next_fetch = peewee.DateTimeField(null=True, index=True)
     # Number of minute between fetches.
-    period = peewee.IntegerField()
+    period = peewee.IntegerField(default=60)
 
 
 class Subscription(db.Model):
@@ -43,4 +43,19 @@ class Subscription(db.Model):
 
 
 def create_tables():
+    """
+    Create the application's tables.
+    """
     db.database.create_tables([Feed, User, Subscription])
+
+
+def preload():
+    """
+    Preload the database with some development data.
+    """
+    User.create(username='keith')
+
+
+if __name__ == '__main__':
+    create_tables()
+    preload()
