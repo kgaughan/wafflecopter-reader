@@ -23,14 +23,20 @@ def import_opml(user, outline):
     """
     Import the given OPML file for the given user.
     """
+    imported = 0
     if outline.attrs.get('type') == 'rss':
+        site_url = outline.attrs.get('htmlUrl')
         url = outline.attrs.get('xmlUrl')
         title = outline.attrs.get('text')
         if url is not None:
-            feed, _ = models.Feed.get_or_create(title=title, url=url)
-            models.Subscription.create_or_get(user=user, feed=feed)
+            feed, _ = models.Feed.create_or_get(title=title,
+                                                url=url, site_url=site_url)
+            _, created = models.Subscription.create_or_get(user=user, feed=feed)
+            if created:
+                imported += 1
     for child in outline:
-        import_opml(user, child)
+        imported += import_opml(user, child)
+    return imported
 
 
 def export_opml(user):
@@ -54,7 +60,8 @@ def main():
             print >> sys.stderr, exc
             return 1
         with models.db.database.atomic():
-            return import_opml(user, opml.parse_string(contents))
+            imported = import_opml(user, opml.parse_string(contents))
+            print "New feeds imported: %d" % (imported,)
     elif args['export']:
         return export_opml(user)
 
