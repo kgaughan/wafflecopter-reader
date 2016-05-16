@@ -49,7 +49,7 @@ def main():
     try:
         user = models.User.get(username=args['--user'])
     except models.User.DoesNotExist:
-        print("Unknown user: {}", args['--user'], file=sys.stderr)
+        print("Unknown user:", args['--user'], file=sys.stderr)
         return 1
 
     if args['import']:
@@ -61,7 +61,7 @@ def main():
             return 1
         with models.db.database.atomic():
             imported = import_opml(user, opml.parse_string(contents))
-            print("New feeds imported: {}", imported)
+            print("New feeds imported:", imported)
     elif args['export']:
         return export_opml(user)
 
