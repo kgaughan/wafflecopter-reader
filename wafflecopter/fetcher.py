@@ -1,25 +1,19 @@
-"""\
-Fetch feeds pending update.
-
-Usage:
-  wc-fetch
-  wc-fetch -h | --help
-
-Options:
-  -h, --help         Show this screen and exit.
-"""
+from __future__ import print_function
 
 import datetime
 import sys
 
-import docopt
+import click
 import feedparser
 
 from wafflecopter import models
 
 
+@click.command()
 def main():
-    args = docopt.docopt(__doc__)
+    """
+    Fetch feeds pending update.
+    """
     to_update = (models.Feed
                  .select()
                  .where((models.Feed.next_fetch <= datetime.datetime.utcnow()) |
@@ -33,4 +27,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    main()
