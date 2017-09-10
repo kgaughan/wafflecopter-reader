@@ -26,13 +26,13 @@ setup(
     test_suite='tests.suite',
 
     install_requires=[
-        'docopt',
-        'feedparser',
-        'Flask',
-        'Flask-WTF',
-        'peewee',
-        'wtforms',
-        'wtf-peewee',
+        'click>=2.0',
+        'feedparser==5.2.1',
+        'Flask==0.12.1',
+        'Flask-WTF==0.14.2',
+        'peewee==2.9.2',
+        'wtforms==2.1',
+        'wtf-peewee',  # TODO: Create a FreeBSD port for this.
     ],
 
     classifiers=(
