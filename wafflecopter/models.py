@@ -1,6 +1,8 @@
 import peewee
+from playhouse import flask_utils
 
-from wafflecopter.config import db
+
+db = flask_utils.FlaskDB()
 
 
 class User(db.Model):

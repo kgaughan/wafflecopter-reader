@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import datetime
+import pprint
 import sys
 
 import click
@@ -23,6 +24,11 @@ def main():
         # parse(url_file_stream_or_string,
         #       etag=None, modified=None, agent=None, referrer=None,
         #       handlers=None, request_headers=None, response_headers=None)
+        result = feedparser.parse(feed.url,
+                                  etag=feed.http_etag,
+                                  modified=feed.http_last_modified)
+        pprint.pprint(result)
+        break
     return 0
 
 
