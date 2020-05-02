@@ -41,11 +41,11 @@ class Subscription(db.Model):
     A feed subscription.
     """
 
-    user = peewee.ForeignKeyField(User, related_name='subscriptions')
+    user = peewee.ForeignKeyField(User, related_name="subscriptions")
     feed = peewee.ForeignKeyField(Feed)
 
     class Meta:
-        primary_key = peewee.CompositeKey('user', 'feed')
+        primary_key = peewee.CompositeKey("user", "feed")
 
 
 def create_tables():
@@ -59,9 +59,9 @@ def preload():
     """
     Preload the database with some development data.
     """
-    User.create(username='keith')
+    User.create(username="keith")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     create_tables()
     preload()
