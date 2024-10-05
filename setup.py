@@ -26,7 +26,7 @@ setup(
     install_requires=[
         "click==7.0",
         "feedparser==5.2.1",
-        "Flask==1.1.1",
+        "Flask==2.2.5",
         "Flask-WTF==0.14.3",
         "peewee==3.8.0",
         "wtforms==2.1",
